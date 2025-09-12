@@ -5,7 +5,8 @@ if (typeof CCSE == 'undefined') Game.LoadMod('https://klattmose.github.io/Cookie
 CustomNews.launch = function(){
     CustomNews.init = function(){
         CustomNews.isLoaded = true;
-        Game.Notify("Custom News Loaded");
+        var strStream = "Custom News Loaded";
+        Game.Notify(strStream);
     }
 }
 
