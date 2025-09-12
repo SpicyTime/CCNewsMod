@@ -7,11 +7,11 @@ CustomNews.version = "1.0.0";
 CustomNews.GameVersion = "2.052";
 CustomNews.launch = function(){
     CustomNews.init = function(){
+        console.log("Initialized")
         CustomNews.isLoaded = true;
         var strStream = "Custom News Loaded";
-        Game.Notify(strStream);
+        Game.Notify(strStream, '', '', 1, 1);
     }
-    CustomNews.init();
     if(CCSE.ConfirmGameVersion(CustomNews.name, CustomNews.version, CustomNews.Game)){
         Game.registerMod(CustomNews.name, CustomNews);
     }
