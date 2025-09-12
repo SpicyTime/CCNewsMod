@@ -7,25 +7,21 @@ CustomNews.version = "1.0.0";
 CustomNews.GameVersion = "2.052";
 CustomNews.launch = function(){
     CustomNews.init = function(){
-        console.log("Initialized");
         CustomNews.isLoaded = true;
-        var strStream = "Custom News Loaded";
-        Game.Notify(strStream, '', '', 1, 1);
+        var startupStr = "Custom News Loaded";
+        Game.Notify(startupStr, '', '', 1, 1);
     }
+    //Checks if the versions are correct then registers the mod
     if(CCSE.ConfirmGameVersion(CustomNews.name, CustomNews.version, CustomNews.GameVersion)){
         Game.registerMod(CustomNews.name, CustomNews);
     }
 
 }
-console.log("Hello");
 if(!CustomNews.isLoaded){
-    console.log("Attempted load");
     if(CCSE && CCSE.isLoaded){
-        console.log("Loaded Successfully");
         CustomNews.launch();
 
     }else{
-        console.log("Post poning Launch");
         if(!CCSE) var CCSE = {};
         if (!CCSE.postLoadHooks) CCSE.postLoadHooks = [];
         CCSE.postLoadHooks.push(CustomNews.launch);
