@@ -11,12 +11,15 @@ CustomNews.launch = function(){
 }
 
 if(!CustomNews.isLoaded){
+    console.log("Attempted load")
     if(CCSE && CCSE.isLoaded){
+        console.log("Loaded Successfully");
         CustomNews.launch();
 
     }else{
+        console.log("Post poning Launch");
         if(!CCSE) var CCSE = {};
         if (!CCSE.postLoadHooks) CCSE.postLoadHooks = [];
-        CCSE.postLoadHooks.push(CustomNews.launch)
+        CCSE.postLoadHooks.push(CustomNews.launch);
     }
 }
