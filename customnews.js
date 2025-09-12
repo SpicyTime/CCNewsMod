@@ -6,16 +6,45 @@ CustomNews.name = "CustomNews";
 CustomNews.version = "1.0.0";
 CustomNews.GameVersion = "2.052";
 CustomNews.launch = function(){
+
     CustomNews.init = function(){
         CustomNews.isLoaded = true;
+        CustomNews.config = {};
+        CCSE.customSave.push(function(){
+            CCSE.config.OtherMods.CustomNews = CustomNews.config;
+        });
+        CCSE.customLoad.push(function(){
+            if(CCSE.config.OtherMods.CustomNews){
+                CustomNews.config = CCSE.config.OtherMods.CustomNews;
+            }else{
+                CustomNews.config = CustomNews.defaultConfig();
+            }
+        });
+
+        if(CustomNews.postloadHooks) {
+			for(var i = 0; i < CustomNews.postloadHooks.length; ++i) {
+				(CustomNews.postloadHooks[i])();
+			}
+		}
+
         var startupStr = "Custom News Loaded";
         Game.Notify(startupStr, '', '', 1, 1);
     }
-    //Checks if the versions are correct then registers the mod
+
+    // Returns the default configuration of the project
+    CustomNews.defaultConfig = function(){
+        return {
+            showAchievementHints: false,
+            showCreateMessageBox: false,
+            achievementsGotten: [],
+            replacePercentage: 50,
+        };
+    }
+
+    // Checks if the versions are correct then registers the mod
     if(CCSE.ConfirmGameVersion(CustomNews.name, CustomNews.version, CustomNews.GameVersion)){
         Game.registerMod(CustomNews.name, CustomNews);
     }
-
 }
 if(!CustomNews.isLoaded){
     if(CCSE && CCSE.isLoaded){
