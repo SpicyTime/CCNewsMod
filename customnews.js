@@ -11,9 +11,11 @@ CustomNews.launch = function(){
         var strStream = "Custom News Loaded";
         Game.Notify(strStream);
     }
+    CustomNews.init();
     if(CCSE.ConfirmGameVersion(CustomNews.name, CustomNews.version, CustomNews.Game)){
         Game.registerMod(CustomNews.name, CustomNews);
     }
+
 }
 console.log("Hello");
 if(!CustomNews.isLoaded){
