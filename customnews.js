@@ -9,9 +9,9 @@ CustomNews.launch = function(){
         Game.Notify(strStream);
     }
 }
-
+console.log("Hello");
 if(!CustomNews.isLoaded){
-    console.log("Attempted load")
+    console.log("Attempted load");
     if(CCSE && CCSE.isLoaded){
         console.log("Loaded Successfully");
         CustomNews.launch();
