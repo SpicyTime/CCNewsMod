@@ -1,7 +1,7 @@
 /* global Game */
 
-if (CustomNews == undefined) CustomNews = {};
-if (typeof CCSE == undefined) Game.LoadMod('https://klattmose.github.io/CookieClicker/' + (0 ? 'Beta/' : '') + 'CCSE.js');
+if (CustomNews == undefined) var CustomNews = {};
+if (typeof CCSE == 'undefined') Game.LoadMod('https://klattmose.github.io/CookieClicker/' + (0 ? 'Beta/' : '') + 'CCSE.js');
 CustomNews.launch = function(){
     CustomNews.init = function(){
         CustomNews.isLoaded = true;
