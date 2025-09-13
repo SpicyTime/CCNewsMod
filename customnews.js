@@ -11,6 +11,7 @@ CustomNews.launch = function(){
     CustomNews.init = function(){
         CustomNews.isLoaded = true;
         CustomNews.config = {};
+        console.log("Initializing")
         CustomNews.config = CustomNews.defaultConfig();
         CustomNews.prevMessageCustom = false;
         CCSE.customSave.push(function(){
@@ -31,9 +32,12 @@ CustomNews.launch = function(){
                 (CustomNews.postloadHooks[i])();
 			}
 		}
-        CustomNews.currentMsg = CustomNews.config.messages[0];
-        setInterval(() => CustomNews.update(), 10);
-        //CustomNews.showMessage(CustomNews.config.messages[0]);
+        // Stores the index of the current custom message
+        CustomNews.currentMsgIndex = 0;
+        CustomNews.currentHexColor = '#ffffff' ;
+        //CustomNews.currentText = CustomNews.config.messages[CustomNews.currentMsgIndex];
+        //CustomNews.showMessage(CustomNews.currentMsgIndex);
+        setInterval(() => CustomNews.update(), 5);
 
         let startupStr = "Custom News Loaded";
         Game.Notify(startupStr, '', '', 1, 1);
@@ -50,57 +54,57 @@ CustomNews.launch = function(){
         };
     }
 
-    CustomNews.addMessage = function(msg_str, hex_color ){
-        const msg = {text: msg_str, hex_color: hex_color};
+    CustomNews.addMessage = function(msg_str, hexColor ){
+        const msg = {text: msg_str, hexColor: hexColor};
         CustomNews.config.messages.push(msg);
         return msg;
     }
     // Returns a list of message objects
     CustomNews.defaultMessages = function(){
         return [
-            { text: "Maxsuulis Rocks!", hex_color: '#852323ff' },
-            { text: "Hello from CustomNews mod!", hex_color: '#852323ff' }
+            { text: "Maxsuulis Rocks!", hexColor: '#852323ff' },
+            { text: "Hello from CustomNews mod!", hexColor: '#852323ff' }
         ];
     }
 
-    CustomNews.showMessage = function(custom_msg){
-        var newsTextEl = document.getElementById("commentsText1");
-        CustomNews.currentMsg = custom_msg;
+    CustomNews.showMessage = function(customMsgIndex){
+
+        //const customMsg = JSON.parse(JSON.stringify(CustomNews.config.messages[customMsgIndex]));
+
+        //CustomNews.currentMsgIndex = customMsgIndex;
+        //CustomNews.currentText = customMsg.text;
+        //CustomNews.currentHexColor = customMsg.hexColor;
         CustomNews.prevMessageCustom = true;
-        if (newsTextEl){
-            console.log(custom_msg.text);
-            newsTextEl.style.color = custom_msg.hex_color;
-            newsTextEl.textContent = custom_msg.text;
-        }
-    } 
+    
+        //Game.tickerL.style.color = customMsg.hexColor;
+        Game.tickerL.textContent = 'Hello!';
+        
+    }
 
     CustomNews.showRandMsg = function(){
-        var rand_index = Math.floor(Math.random() * CustomNews.config.messages.length); 
+        var randIndex = Math.floor(Math.random() * CustomNews.config.messages.length); 
         console.log(CustomNews.config.messages);
-        CustomNews.showMessage(CustomNews.config.messages[rand_index]);
+        //CustomNews.showMessage(randIndex);
     }
     
     CustomNews.update = function(){
-        var newsTextEl1 = document.getElementById("commentsText1");
-        var newsTextEl2 = document.getElementById("commentsText2");
+        // Changes the secondary color
+        Game.tickerBelowL.style.color = CustomNews.currentHexColor;
 
-        if (newsTextEl1.textContent != CustomNews.currentMsg.text){
-            newsTextEl2.style.color = CustomNews.currentMsg.hex_color;
-            CustomNews.currentMsg.text = newsTextEl1.textContent;
-            let rand = Math.random();
-            if (rand <= CustomNews.config.replacePercentage / 100){
-                CustomNews.showRandMsg();
-                return;
-            }
-
-            if (CustomNews.prevMessageCustom){
-                console.log("Updating colors");
-                const white = '#ffffff';
-                newsTextEl1.style.color = '#ffffff';
-                CustomNews.currentMsg.hex_color = '#ffffff';
-                CustomNews.prevMessageCustom = false;    
-            }
+        // Shows a custom message based on a random value
+        if (Math.random() <= CustomNews.config.replacePercentage / 100){
+            CustomNews.showRandMsg();
+            return;
         }
+        // Swaps everything to a non-custom message format
+        if (CustomNews.prevMessageCustom){
+            const defaultColor = '#ffffff';
+            Game.tickerL.style.color = defaultColor;
+            CustomNews.currentHexColor = defaultColor;
+            CustomNews.prevMessageCustom = false;
+        }
+    
+
     }
 
 
@@ -126,5 +130,7 @@ function reloadCustomNews() {
     delete Game.mods.CustomNews;
     console.log("Reloading Custom News");
     Game.LoadMod("http://localhost:8080/customnews.js");
+    CustomNews.config = CustomNews.defaultConfig();
+    console.log(CustomNews.config.messages);
 }
 
