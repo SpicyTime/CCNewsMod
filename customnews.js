@@ -63,6 +63,7 @@ CustomNews.launch = function(){
         console.log("Attempting to change text el");
         if (newsTextEl){
             console.log("Changing text el");
+            console.log(custom_msg.text);
             newsTextEl.style.color = custom_msg.hex_color;
             newsTextEl.textContent = custom_msg.text;
         }
@@ -88,10 +89,9 @@ CustomNews.launch = function(){
         if (newsTextEl1.textContent != CustomNews.currentMsg.text){
             newsTextEl2.style.color = CustomNews.currentMsg.hex_color;
             CustomNews.currentMsg.text = newsTextEl1.textContent;
-            var rand = Math.random();
+            let rand = Math.random();
             if (rand <= CustomNews.config.replacePercentage / 100){
                 CustomNews.showRandMsg();
-                Game.UpdateTicker();
                 return;
             }
             if (CustomNews.prevMessageCustom){
@@ -101,7 +101,6 @@ CustomNews.launch = function(){
                 CustomNews.currentMsg.hex_color = '#ffffff';
                 CustomNews.prevMessageCustom = false;    
             }
-            Game.UpdateTicker();
         }
     }
 
