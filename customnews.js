@@ -89,6 +89,7 @@ CustomNews.launch = function(){
             var rand = Math.random();
             if (rand <= CustomNews.config.replacePercentage / 100){
                 CustomNews.showRandMsg();
+                Game.UpdateTicker();
                 return;
             }
             if (CustomNews.prevMessageCustom){
@@ -98,6 +99,7 @@ CustomNews.launch = function(){
                 CustomNews.currentMsg.hex_color = '#ffffff';
                 CustomNews.prevMessageCustom = false;    
             }
+            Game.UpdateTicker();
         }
     }
 
