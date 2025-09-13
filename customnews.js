@@ -33,7 +33,7 @@ CustomNews.launch = function(){
 				(CustomNews.postloadHooks[i])();
 			}
 		}
-        setInterval(() => CustomNews.update, 5);
+        setInterval(() => CustomNews.update(), 5);
         CustomNews.showMessage(CustomNews.config.messages[0]);
 
         let startupStr = "Custom News Loaded";
@@ -83,7 +83,7 @@ CustomNews.launch = function(){
         if (newsTextEl1.textContent != CustomNews.currentMsg.text){
             newsTextEl2.style.color = CustomNews.currentMsg.hex_color;
             CustomNews.currentMsg.text = newsTextEl1.textContent;
-            if (prevMessageCustom){
+            if (CustomNews.prevMessageCustom){
                 const white = '#ffffff';
                 newsTextEl1.style.color = '#ffffff';
                 CustomNews.currentMsg.hex_color = '#ffffff';
