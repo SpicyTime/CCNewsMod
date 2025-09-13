@@ -65,6 +65,7 @@ CustomNews.launch = function(){
             newsTextEl.style.color = custom_msg.hex_color;
             newsTextEl.textContent = custom_msg.text;
         }
+        
     }
     // Returns a list of message objects
     CustomNews.defaultMessages = function(){
