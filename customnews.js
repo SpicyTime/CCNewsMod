@@ -86,7 +86,7 @@ CustomNews.launch = function(){
             if (CustomNews.prevMessageCustom){
                 const white = '#ffffff';
                 newsTextEl1.style.color = '#ffffff';
-                newsTextEl1.style.color = '#ffffff';
+                newsTextEl2.style.color = '#ffffff';
                 CustomNews.currentMsg.hex_color = '#ffffff';
                 CustomNews.prevMessageCustom = false;    
             }
