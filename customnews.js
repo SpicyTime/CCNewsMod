@@ -73,12 +73,12 @@ CustomNews.launch = function(){
         ];
     }
     CustomNews.showRandMsg = function(){
-        var rand_index = Math.floor(Math.random() * CustomNews.messages.length); 
+        var rand_index = Math.floor(Math.random() * CustomNews.messages.length()); 
         console.log(rand_index);
         CustomNews.showMessage(CustomNews.messages[rand_index]);
     }
 
-    
+
     CustomNews.update = function(){
         
         var newsTextEl1 = document.getElementById("commentsText1");
