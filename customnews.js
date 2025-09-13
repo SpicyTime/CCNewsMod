@@ -60,7 +60,9 @@ CustomNews.launch = function(){
         var newsTextEl = document.getElementById("commentsText1");
         CustomNews.currentMsg = custom_msg;
         CustomNews.prevMessageCustom = true;
+        console.log("Attempting to change text el");
         if (newsTextEl){
+            console.log("Changing text el");
             newsTextEl.style.color = custom_msg.hex_color;
             newsTextEl.textContent = custom_msg.text;
         }
