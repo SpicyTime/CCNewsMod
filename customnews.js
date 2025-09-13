@@ -45,7 +45,7 @@ CustomNews.launch = function(){
             showAchievementHints: false,
             showCreateMessageBox: false,
             achievementsGotten: [],
-            replacePercentage: 50,
+            replacePercentage: 100,
             messages: CustomNews.defaultMessages()
         };
     }
@@ -72,6 +72,10 @@ CustomNews.launch = function(){
             { text: "Hello from CustomNews mod!", hex_color: '#852323ff' }
         ];
     }
+    CustomNews.showRandMsg = function(){
+        var rand_index = Math.floor(Math.random() * CustomNews.messages.length); 
+        CustomNews.showMessage(CustomNews.messages[rand_index]);
+    }
 
     CustomNews.update = function(){
         
@@ -81,11 +85,15 @@ CustomNews.launch = function(){
         if (newsTextEl1.textContent != CustomNews.currentMsg.text){
             newsTextEl2.style.color = CustomNews.currentMsg.hex_color;
             CustomNews.currentMsg.text = newsTextEl1.textContent;
+            var rand = Math.random();
+            if (rand <= CustomNews.config.replacePercentage / 100){
+                showRandMsg();
+                return;
+            }
             if (CustomNews.prevMessageCustom){
                 console.log("Updating colors");
                 const white = '#ffffff';
                 newsTextEl1.style.color = '#ffffff';
-                //newsTextEl2.style.color = '#ffffff'
                 CustomNews.currentMsg.hex_color = '#ffffff';
                 CustomNews.prevMessageCustom = false;    
             }
