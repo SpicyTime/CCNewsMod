@@ -31,6 +31,7 @@ CustomNews.launch = function(){
 				(CustomNews.postloadHooks[i])();
 			}
 		}
+        console.log(CustomNews.config.messages);
         CustomNews.showMessage(CustomNews.config.messages[0]);
         let startupStr = "Custom News Loaded";
         Game.Notify(startupStr, '', '', 1, 1);
