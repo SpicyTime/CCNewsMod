@@ -46,21 +46,6 @@ CustomNews.launch = function(){
             messages: CustomNews.defaultMessages()
         };
     }
-
-    CustomNews.addMessage = function(msg_str, hex_color ){
-        const msg = [
-            hex_color,
-            msg_str
-        ];
-        CustomNews.config.messages.push(msg);
-        return msg;
-    }
-
-    // Checks if the versions are correct then registers the mod
-    if(CCSE.ConfirmGameVersion(CustomNews.name, CustomNews.version, CustomNews.GameVersion)){
-        Game.registerMod(CustomNews.name, CustomNews);
-    }
-
     CustomNews.showMessage = function(custom_msg){
         let newsTextEl = document.getElementById("commentsText1");
         console.log(custom_msg);
@@ -72,12 +57,23 @@ CustomNews.launch = function(){
     }
 
     CustomNews.defaultMessages = function(){
-        const defaultColor = '#852323ff';
         return [
-            ["Maxsuulis Rocks!", defaultColor],
-            ["Hello from CustomNews mod!", defaultColor]
+            { text: "Maxsuulis Rocks!", hex_color: '#852323ff' },
+            { text: "Hello from CustomNews mod!", hex_color: '#852323ff' }
         ];
+    };
+
+    CustomNews.addMessage = function(msg_str, hex_color ){
+        const msg = {text: msg_str, hex_color: hex_color};
+        CustomNews.config.messages.push(msg);
+        return msg;
     }
+
+    // Checks if the versions are correct then registers the mod
+    if(CCSE.ConfirmGameVersion(CustomNews.name, CustomNews.version, CustomNews.GameVersion)){
+        Game.registerMod(CustomNews.name, CustomNews);
+    }
+
 }
 
 
