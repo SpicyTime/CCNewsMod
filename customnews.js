@@ -13,6 +13,8 @@ CustomNews.launch = function(){
         CustomNews.isLoaded = true;
         CustomNews.config = {};
         CustomNews.config = CustomNews.defaultConfig();
+        CustomNews.prevMessageCustom = false;
+        CustomNews.currentMsg = {};
         CCSE.customSave.push(function(){
             CCSE.config.OtherMods.CustomNews = CustomNews.config;
         });
@@ -31,8 +33,10 @@ CustomNews.launch = function(){
 				(CustomNews.postloadHooks[i])();
 			}
 		}
-        console.log(CustomNews.config.messages);
+        // Updates every 2 seconds
+        setInterval(CustomNews.update(), 250);
         CustomNews.showMessage(CustomNews.config.messages[0]);
+
         let startupStr = "Custom News Loaded";
         Game.Notify(startupStr, '', '', 1, 1);
     }
@@ -47,28 +51,39 @@ CustomNews.launch = function(){
             messages: CustomNews.defaultMessages()
         };
     }
-    CustomNews.showMessage = function(custom_msg){
-        let newsTextEl = document.getElementById("commentsText1");
-        console.log(custom_msg);
-        console.log(newsTextEl)
-        if (newsTextEl){
-            newsTextEl.style.color = custom_msg.hex_color;
-            newsTextEl.textContent = custom_msg.text;
-        }
-    }
-
-    CustomNews.defaultMessages = function(){
-        return [
-            { text: "Maxsuulis Rocks!", hex_color: '#852323ff' },
-            { text: "Hello from CustomNews mod!", hex_color: '#852323ff' }
-        ];
-    };
 
     CustomNews.addMessage = function(msg_str, hex_color ){
         const msg = {text: msg_str, hex_color: hex_color};
         CustomNews.config.messages.push(msg);
         return msg;
     }
+
+    CustomNews.showMessage = function(custom_msg){
+        let newsTextEl = document.getElementById("commentsText1");
+        CustomText.currentMsg = custom_msg;
+        if (newsTextEl){
+            newsTextEl.style.color = custom_msg.hex_color;
+            newsTextEl.textContent = custom_msg.text;
+        }
+    }
+    // Returns a list of message objects
+    CustomNews.defaultMessages = function(){
+        return [
+            { text: "Maxsuulis Rocks!", hex_color: '#852323ff' },
+            { text: "Hello from CustomNews mod!", hex_color: '#852323ff' }
+        ];
+    }
+
+    CustomNews.update = function(){
+        var newsTextEl1 = document.getElementById("commentsText1");
+        var newsTextEl2 = document.getElementById("commentsText2");
+        if (newsTextEl1.textContent !== CustomText.currentMsg.text){
+            newsTextEl2.style.color = currentMsg.hex_color;
+            currentMsg.text = newsTextEl1.textContent;
+            
+        }
+    }
+
 
     // Checks if the versions are correct then registers the mod
     if(CCSE.ConfirmGameVersion(CustomNews.name, CustomNews.version, CustomNews.GameVersion)){
