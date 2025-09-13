@@ -77,7 +77,7 @@ CustomNews.launch = function(){
     CustomNews.update = function(){
         var newsTextEl1 = document.getElementById("commentsText1");
         var newsTextEl2 = document.getElementById("commentsText2");
-        if (newsTextEl1.textContent !== CustomNews.currentMsg.text){
+        if (newsTextEl1.textContent != CustomNews.currentMsg.text){
             newsTextEl2.style.color = CustomNews.hex_color;
             CustomNews.currentMsg.text = newsTextEl1.textContent;
             
