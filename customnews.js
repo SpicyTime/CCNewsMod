@@ -33,8 +33,7 @@ CustomNews.launch = function(){
 				(CustomNews.postloadHooks[i])();
 			}
 		}
-        // Updates every 0.5 seconds
-        setInterval(() => CustomNews.update, 250);
+        setInterval(() => CustomNews.update, 5);
         CustomNews.showMessage(CustomNews.config.messages[0]);
 
         let startupStr = "Custom News Loaded";
@@ -76,6 +75,7 @@ CustomNews.launch = function(){
     }
 
     CustomNews.update = function(){
+        console.log("update")
         var newsTextEl1 = document.getElementById("commentsText1");
         var newsTextEl2 = document.getElementById("commentsText2");
         if (newsTextEl1.textContent != CustomNews.currentMsg.text){
