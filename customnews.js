@@ -12,7 +12,7 @@ CustomNews.launch = function(){
     CustomNews.init = function(){
         CustomNews.isLoaded = true;
         CustomNews.config = {};
-
+        CustomNews.config = CustomNews.defaultConfig();
         CCSE.customSave.push(function(){
             CCSE.config.OtherMods.CustomNews = CustomNews.config;
         });
