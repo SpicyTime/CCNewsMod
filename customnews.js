@@ -88,7 +88,7 @@ CustomNews.launch = function(){
             CustomNews.currentMsg.text = newsTextEl1.textContent;
             var rand = Math.random();
             if (rand <= CustomNews.config.replacePercentage / 100){
-                showRandMsg();
+                CustomNews.showRandMsg();
                 return;
             }
             if (CustomNews.prevMessageCustom){
