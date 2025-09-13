@@ -81,12 +81,12 @@ CustomNews.launch = function(){
         var newsTextEl2 = document.getElementById("commentsText2");
 
         if (newsTextEl1.textContent != CustomNews.currentMsg.text){
-            newsTextEl2.style.color = CustomNews.hex_color;
+            newsTextEl2.style.color = CustomNews.currentMsg.hex_color;
             CustomNews.currentMsg.text = newsTextEl1.textContent;
             if (prevMessageCustom){
                 const white = '#ffffff';
-                newsTextEl1.style.color = white;
-                CustomNews.currentMsg.hex_color = white;
+                newsTextEl1.style.color = '#ffffff';
+                CustomNews.currentMsg.hex_color = '#ffffff';
                 CustomNews.prevMessageCustom = false;    
             }
         }
