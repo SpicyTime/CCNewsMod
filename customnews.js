@@ -75,7 +75,7 @@ CustomNews.launch = function(){
     CustomNews.showRandMsg = function(){
         var rand_index = Math.floor(Math.random() * CustomNews.config.messages.length); 
         console.log(rand_index);
-        CustomNews.showMessage(CustomNews.messages[rand_index]);
+        CustomNews.showMessage(CustomNews.config.messages[rand_index]);
     }
 
     CustomNews.update = function(){
