@@ -21,6 +21,7 @@ CustomNews.launch = function(){
             if(CCSE.config.OtherMods.CustomNews){
                 CustomNews.config = CCSE.config.OtherMods.CustomNews;
             }else{
+                console.log("Using Default");
                 CustomNews.config = CustomNews.defaultConfig();
             }
         });
@@ -62,6 +63,8 @@ CustomNews.launch = function(){
 
     CustomNews.showMessage = function(custom_msg){
         let newsTextEl = document.getElementById("commentsText1");
+        console.log(custom_msg);
+        console.log(newsTextEl)
         if (newsTextEl){
             newsTextEl.style.color = custom_msg.hex_color;
             newsTextEl.textContent = custom_msg.text;
