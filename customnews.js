@@ -31,7 +31,7 @@ CustomNews.launch = function(){
                 (CustomNews.postloadHooks[i])();
 			}
 		}
-        CustomNews.currentMsg = CustomNews.config.messages[0];
+        //CustomNews.currentMsg = CustomNews.config.messages[0];
         setInterval(() => CustomNews.update(), 10);
         //CustomNews.showMessage(CustomNews.config.messages[0]);
 
@@ -55,19 +55,6 @@ CustomNews.launch = function(){
         CustomNews.config.messages.push(msg);
         return msg;
     }
-
-    CustomNews.showMessage = function(custom_msg){
-        var newsTextEl = document.getElementById("commentsText1");
-        CustomNews.currentMsg = custom_msg;
-        CustomNews.prevMessageCustom = true;
-        console.log("Attempting to change text el");
-        if (newsTextEl){
-            console.log("Changing text el");
-            console.log(custom_msg.text);
-            newsTextEl.style.color = custom_msg.hex_color;
-            newsTextEl.textContent = custom_msg.text;
-        }
-    } 
     // Returns a list of message objects
     CustomNews.defaultMessages = function(){
         return [
@@ -75,15 +62,25 @@ CustomNews.launch = function(){
             { text: "Hello from CustomNews mod!", hex_color: '#852323ff' }
         ];
     }
+
+    CustomNews.showMessage = function(custom_msg){
+        var newsTextEl = document.getElementById("commentsText1");
+        CustomNews.currentMsg = custom_msg;
+        CustomNews.prevMessageCustom = true;
+        if (newsTextEl){
+            console.log(custom_msg.text);
+            newsTextEl.style.color = custom_msg.hex_color;
+            newsTextEl.textContent = custom_msg.text;
+        }
+    } 
+
     CustomNews.showRandMsg = function(){
         var rand_index = Math.floor(Math.random() * CustomNews.config.messages.length); 
-        console.log(rand_index);
         console.log(CustomNews.config.messages);
         CustomNews.showMessage(CustomNews.config.messages[rand_index]);
     }
-
+    
     CustomNews.update = function(){
-        
         var newsTextEl1 = document.getElementById("commentsText1");
         var newsTextEl2 = document.getElementById("commentsText2");
 
@@ -95,6 +92,7 @@ CustomNews.launch = function(){
                 CustomNews.showRandMsg();
                 return;
             }
+
             if (CustomNews.prevMessageCustom){
                 console.log("Updating colors");
                 const white = '#ffffff';
@@ -110,7 +108,6 @@ CustomNews.launch = function(){
     if(CCSE.ConfirmGameVersion(CustomNews.name, CustomNews.version, CustomNews.GameVersion)){
         Game.registerMod(CustomNews.name, CustomNews);
     }
-
 }
 
 
