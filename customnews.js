@@ -33,7 +33,7 @@ CustomNews.launch = function(){
 				(CustomNews.postloadHooks[i])();
 			}
 		}
-        setInterval(() => CustomNews.update(), 5);
+        setInterval(() => CustomNews.update, 5);
         CustomNews.showMessage(CustomNews.config.messages[0]);
 
         let startupStr = "Custom News Loaded";
@@ -60,6 +60,7 @@ CustomNews.launch = function(){
     CustomNews.showMessage = function(custom_msg){
         var newsTextEl = document.getElementById("commentsText1");
         CustomNews.currentMsg = custom_msg;
+        CustomNews.prevMessageCustom = true;
         if (newsTextEl){
             newsTextEl.style.color = custom_msg.hex_color;
             newsTextEl.textContent = custom_msg.text;
@@ -75,13 +76,19 @@ CustomNews.launch = function(){
     }
 
     CustomNews.update = function(){
-        console.log("update")
+        
         var newsTextEl1 = document.getElementById("commentsText1");
         var newsTextEl2 = document.getElementById("commentsText2");
+
         if (newsTextEl1.textContent != CustomNews.currentMsg.text){
-            newsTextEl2.style.color = CustomNews.currentMsg.hex_color;
+            newsTextEl2.style.color = CustomNews.hex_color;
             CustomNews.currentMsg.text = newsTextEl1.textContent;
-            
+            if (prevMessageCustom){
+                const white = '#ffffff';
+                newsTextEl1.style.color = white;
+                CustomNews.currentMsg.hex_color = white;
+                CustomNews.prevMessageCustom = false;    
+            }
         }
     }
 
