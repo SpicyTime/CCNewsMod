@@ -32,8 +32,8 @@ CustomNews.launch = function(){
 			}
 		}
         CustomNews.currentMsg = CustomNews.config.messages[0];
-        setInterval(() => CustomNews.update(), 50);
-        CustomNews.showMessage(CustomNews.config.messages[0]);
+        setInterval(() => CustomNews.update(), 10);
+        //CustomNews.showMessage(CustomNews.config.messages[0]);
 
         let startupStr = "Custom News Loaded";
         Game.Notify(startupStr, '', '', 1, 1);
