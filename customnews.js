@@ -31,7 +31,7 @@ CustomNews.launch = function(){
                 (CustomNews.postloadHooks[i])();
 			}
 		}
-        //CustomNews.currentMsg = CustomNews.config.messages[0];
+        CustomNews.currentMsg = CustomNews.config.messages[0];
         setInterval(() => CustomNews.update(), 10);
         //CustomNews.showMessage(CustomNews.config.messages[0]);
 
@@ -121,3 +121,10 @@ if(!CustomNews.isLoaded){
         CCSE.postLoadHooks.push(CustomNews.launch);
     }
 }
+//Helper function
+function reloadCustomNews() {
+    delete Game.mods.CustomNews;
+    console.log("Reloading Custom News");
+    Game.LoadMod("http://localhost:8080/customnews.js");
+}
+
