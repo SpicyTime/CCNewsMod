@@ -33,8 +33,8 @@ CustomNews.launch = function(){
 				(CustomNews.postloadHooks[i])();
 			}
 		}
-        // Updates every 2 seconds
-        setInterval(CustomNews.update(), 250);
+        // Updates every 0.5 seconds
+        setInterval(() => CustomNews.update, 250);
         CustomNews.showMessage(CustomNews.config.messages[0]);
 
         let startupStr = "Custom News Loaded";
