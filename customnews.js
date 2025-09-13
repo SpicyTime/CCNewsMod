@@ -78,7 +78,6 @@ CustomNews.launch = function(){
         CustomNews.showMessage(CustomNews.messages[rand_index]);
     }
 
-
     CustomNews.update = function(){
         
         var newsTextEl1 = document.getElementById("commentsText1");
