@@ -6,7 +6,6 @@ CustomNews.name = "CustomNews";
 CustomNews.version = "1.0.0";
 CustomNews.GameVersion = "2.052";
 
-
 CustomNews.launch = function(){
 
     CustomNews.init = function(){
@@ -14,11 +13,10 @@ CustomNews.launch = function(){
         CustomNews.config = {};
         CustomNews.config = CustomNews.defaultConfig();
         CustomNews.prevMessageCustom = false;
-        CustomNews.currentMsg = {};
         CCSE.customSave.push(function(){
             CCSE.config.OtherMods.CustomNews = CustomNews.config;
         });
-
+        
         CCSE.customLoad.push(function(){
             if(CCSE.config.OtherMods.CustomNews){
                 CustomNews.config = CCSE.config.OtherMods.CustomNews;
@@ -29,11 +27,12 @@ CustomNews.launch = function(){
         });
 
         if(CustomNews.postloadHooks) {
-			for(let i = 0; i < CustomNews.postloadHooks.length; ++i) {
-				(CustomNews.postloadHooks[i])();
+            for(let i = 0; i < CustomNews.postloadHooks.length; ++i) {
+                (CustomNews.postloadHooks[i])();
 			}
 		}
-        setInterval(() => CustomNews.update(), 5);
+        CustomNews.currentMsg = CustomNews.config.messages[0];
+        setInterval(() => CustomNews.update(), 50);
         CustomNews.showMessage(CustomNews.config.messages[0]);
 
         let startupStr = "Custom News Loaded";
@@ -65,7 +64,6 @@ CustomNews.launch = function(){
             newsTextEl.style.color = custom_msg.hex_color;
             newsTextEl.textContent = custom_msg.text;
         }
-
     }
     // Returns a list of message objects
     CustomNews.defaultMessages = function(){
@@ -84,9 +82,10 @@ CustomNews.launch = function(){
             newsTextEl2.style.color = CustomNews.currentMsg.hex_color;
             CustomNews.currentMsg.text = newsTextEl1.textContent;
             if (CustomNews.prevMessageCustom){
+                console.log("Updating colors");
                 const white = '#ffffff';
                 newsTextEl1.style.color = '#ffffff';
-                newsTextEl2.style.color = '#ffffff';
+                //newsTextEl2.style.color = '#ffffff'
                 CustomNews.currentMsg.hex_color = '#ffffff';
                 CustomNews.prevMessageCustom = false;    
             }
